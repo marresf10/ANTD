@@ -2,6 +2,7 @@
 //import reactLogo from './assets/react.svg'
 //import viteLogo from '/vite.svg'
 import { DatePicker, Button, ConfigProvider } from 'antd';
+import LayoutComponent from './components/Layout/index.jsx';
 import './App.css'
 
 function App() {
@@ -13,8 +14,7 @@ function App() {
         }
       }}
       >
-      <DatePicker />
-      <Button type="primary">Primary Button</Button>
+      <LayoutComponent></LayoutComponent>
     </ConfigProvider>
     /**<>
     <DatePicker />;
