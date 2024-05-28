@@ -1,25 +1,32 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-import { DatePicker, Button, ConfigProvider } from 'antd';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
 import LayoutComponent from './components/Layout/index.jsx';
-import './App.css'
+import FormLogin from './components/FormLogin';
+import FormSignIn from './components/FormSignIn';
+import './App.css';
 
 function App() {
   return (
     <ConfigProvider
       theme={{
-        token:{
+        token: {
           colorPrimary: "#000000"
         }
       }}
-      >
-      <LayoutComponent></LayoutComponent>
+    >
+      <Router>
+        <Routes>
+          <Route path="/" element={<LayoutComponent />}>
+            <Route path="/login" element={<FormLogin />} />
+            <Route path="/register" element={<FormSignIn />} />
+            <Route index element={<FormLogin />} />
+          </Route>
+        </Routes>
+      </Router>
     </ConfigProvider>
-    /**<>
-    <DatePicker />;
-    </>*/
-  )
+  );
 }
 
-export default App
+export default App;
+
+
