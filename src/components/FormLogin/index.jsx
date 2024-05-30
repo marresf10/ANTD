@@ -1,14 +1,40 @@
+import React, { useState } from 'react';
 import { Form, Input, Button, Card, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './FormLogin.css'
 
 const FormLogin = () => {
-    const onFinish = (values) => {
-        console.log('Success: ', values);
+    
+    const navigate = useNavigate();
+    const [loginError, setLoginError] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const onFinish = async (values) => {
+        setLoading(true); //establece el estado de carga a true al enviar el formulario
+        try{
+            const response = await axios.post('https://lizard-server.vercel.app/api/auth/signin', {
+                email: values.username,
+                password: values.password
+            });
+            console.log('Inicio de sesión exitoso:', response.data); //guarda el token en el almacenamiento local
+            localStorage.setItem('token', response.data.token);
+            navigate('/'); //redirige el usuario a la página principal
+        } catch(error){
+            console.error('Error en el inicio de sesión:', error.response.data);
+            setLoginError(true);
+        } finally {
+            setLoading(false); //establece el estado de carga a false
+        }
+        //console.log('Success: ', values);
     }
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed: ', errorInfo);
+        setLoginError(true);
     }
+    
     return (
         <>
             <Card
@@ -17,12 +43,13 @@ const FormLogin = () => {
                 className='responsive-card'
             >
                 <Form
-                    name="username"
+                    name="normal_login"
                     className="login-form"
                     initialValues={{
                         remember: true,
                     }}
                     onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
                 >
                     <Form.Item
                         name="username"
@@ -43,6 +70,7 @@ const FormLogin = () => {
                         <Input.Password prefix={<LockOutlined />} placeholder='Password'/>
                     </Form.Item>
                     <Form.Item>
+                        {loginError && <p style={{ color: 'red' }}>Credenciales incorrectas. Intentalo de nuevo.</p>}
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Iniciar Sesión
                         </Button>
