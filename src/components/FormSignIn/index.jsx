@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Card, message } from 'antd'
+import { validatePassword } from '../../utils/validation.js';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -16,35 +17,23 @@ const FormSignIn = () => {
     const onFinish = async (values) => {
         setLoading(true);//establece el estado de carga true al enviar el formulario
         try{
-            const response = await axios.post('https://lizard-server.vercel.app/api/auth/signup', {
-                username: values.username,
-                email: values.email,
-                password: values.password,
-                roles: ['moderador']
-            });
-            console.log('Registro exitoso:', response.data);
+            await authService.register(values.username, values.email, values.password);
+            console.log('Registro exitoso');
             navigate('/login');
-        }catch(error){
+        } catch (error){
             console.error('Error en el registro:', error.response.data);
             setRegisterError(true);
-        }finally{
+        } finally {
             setLoading(false);
         }
         //console.log('Success: ', values);
-    }
+    };
+
     const onFinishFailed = (errorInfo) => {
         console.log('Failed: ', errorInfo);
         setRegisterError(true);
     }
 
-    const validatePassword = ({ getFieldValue }) => ({
-        validator(_, value){
-            if(!value || getFieldValue('password') === value){
-                return Promise.resolve();
-            }
-            return Promise.reject(new Error('Las contraseñas no coinciden'));
-        }
-    });
     return (
         <>
             <Card

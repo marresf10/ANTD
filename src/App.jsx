@@ -1,28 +1,25 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
 import { ConfigProvider } from 'antd';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import AppRoutes from './routes';
-import './App.css'
+import './App.css';
 
 function App() {
   return (
-    <ConfigProvider
-      theme={{
-        token:{
-          colorPrimary: "#000000"
-        }
-      }}
-      >
     <BrowserRouter>
-    < AppRoutes/>
+      <AuthProvider>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: "#000000"
+            }
+          }}
+        >
+          <AppRoutes />
+        </ConfigProvider>
+      </AuthProvider>
     </BrowserRouter>
-    </ConfigProvider>
-    /**<>
-    <DatePicker />;
-    </>*/
-  )
+  );
 }
 
-export default App
+export default App;
