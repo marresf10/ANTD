@@ -1,48 +1,46 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Card, message } from 'antd'
-import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { Form, Input, Button, Card } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import axios from 'axios';
 import authService from '../../services/auth';
-import './FormLogin.css'
+import { storageController } from '../../services/token'; // Corrige la ruta de importación
+import './FormLogin.css';
 
 const FormLogin = () => {
-
-    const useAuthData = useAuth();
-    console.log(useAuthData);
-    
+    const { login } = useAuth();
+    //const { login } = useAuthData();
     const navigate = useNavigate();
     const [loginError, setLoginError] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
-        setLoading(true); //establece el estado de carga a true al enviar el formulario
+        setLoading(true);
         setLoginError(false);
-        try{
+        try {
             const response = await authService.loginF(values.username, values.password);
-            if (response && response.data){
-                localStorage.setItem('token', response.data.token);
-                console.log(response.data.token)
+            if (response && response.data) {
+                //const token = response.data.token;
+                localStorage.setItem('token', response.data.generatedToken);
+                login(response.data.generatedToken);
                 navigate('/');
             } else {
                 console.error('Error en el inicio de sesión: Respuesta inesperada');
                 setLoginError(true);
-            } 
-        }catch (error) {
+            }
+        } catch (error) {
             console.error('Error en el inicio de sesión:', error.response ? error.response.data : error.message);
             setLoginError(true);
         } finally {
             setLoading(false);
         }
-        //console.log('Success: ', values);
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed: ', errorInfo);
         setLoginError(true);
-    }
-    
+    };
+
     return (
         <>
             <Card
@@ -75,19 +73,19 @@ const FormLogin = () => {
                             message: 'Por favor ingrese su contraseña'
                         }]}
                     >
-                        <Input.Password prefix={<LockOutlined />} placeholder='Password'/>
+                        <Input.Password prefix={<LockOutlined />} placeholder='Password' />
                     </Form.Item>
                     <Form.Item>
-                        {loginError && <p style={{ color: 'red' }}>Credenciales incorrectas. Intentalo de nuevo.</p>}
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        {loginError && <p style={{ color: 'red' }}>Credenciales incorrectas. Inténtalo de nuevo.</p>}
+                        <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
                             Iniciar Sesión
                         </Button>
                     </Form.Item>
-                    ¿Aún no tienes cuenta? <a href="">Registrate</a>
+                    ¿Aún no tienes cuenta? <a href="">Regístrate</a>
                 </Form>
             </Card>
         </>
     );
 }
 
-export default FormLogin;
+export default FormLogin;
