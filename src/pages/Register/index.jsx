@@ -1,6 +1,6 @@
 import React from 'react';
 import LayoutComponent from '../../components/Layout/index.jsx';
-import FormRegister from '../../components/FormSignIn/index.jsx';
+import FormRegister from '../../components/FormSignUp/index.jsx';
 import ImageLogin from '../../components/ImageLogin/imginicio.jsx'
 
 const Register = () => {

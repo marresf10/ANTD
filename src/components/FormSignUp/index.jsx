@@ -1,87 +1,81 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Card, message } from 'antd'
-import { validatePassword } from '../../utils/validation.js';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons'
+import { Form, Input, Button, Card } from 'antd';
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './FormSignIn.css'
+import authService from '../../services/auth.js';
+import './FormSignUp.css';
 
-const FormSignIn = () => {
-    //Estado de error de registro
+const FormSignUp = () => {
     const [registerError, setRegisterError] = useState(false);
-    //Estado de carga
     const [loading, setLoading] = useState(false);
-    //importar rutas
     const navigate = useNavigate();
 
     const onFinish = async (values) => {
-        setLoading(true);//establece el estado de carga true al enviar el formulario
-        try{
+        setLoading(true);
+        try {
             await authService.register(values.username, values.email, values.password);
             console.log('Registro exitoso');
             navigate('/login');
-        } catch (error){
-            console.error('Error en el registro:', error.response.data);
+        } catch (error) {
+            console.error('Error en el registro:', error);
+            if (error.response && error.response.data) {
+                console.error('Error en el registro:', error.response.data);
+            } else {
+                console.error('Error desconocido en el registro');
+            }
             setRegisterError(true);
         } finally {
             setLoading(false);
         }
-        //console.log('Success: ', values);
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed: ', errorInfo);
         setRegisterError(true);
-    }
+    };
 
     return (
         <>
-            <Card
-                title="REGISTRATE!"
-                bordered={false}
-                className='responsive-card'
-            >
+            <Card title="REGISTRATE!" bordered={false} className='responsive-card'>
                 <Form
                     name="username"
                     className="login-form"
-                    initialValues={{
-                        remember: true,
-                    }}
+                    initialValues={{ remember: true }}
                     onFinish={onFinish}
                 >
                     <Form.Item
                         name="username"
-                        rules={[{
-                            required: true,
-                            message: 'Por favor ingrese su usuario'
-                        }]}
+                        rules={[{ required: true, message: 'Por favor ingrese su usuario' }]}
                     >
                         <Input prefix={<UserOutlined />} placeholder='User' />
                     </Form.Item>
                     <Form.Item
                         name="email"
-                        rules={[{
-                            required: true,
-                            message: 'Por favor ingrese su correo'
-                        }]}
+                        rules={[{ required: true, message: 'Por favor ingrese su correo' }]}
                     >
                         <Input prefix={<MailOutlined />} placeholder='Correo' />
                     </Form.Item>
                     <Form.Item
                         name="password"
-                        rules={[{
-                            required: true,
-                            message: 'Por favor ingrese su contraseña'
-                        }]}
+                        rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
                     >
                         <Input.Password prefix={<LockOutlined />} placeholder='Password'/>
                     </Form.Item>
                     <Form.Item
                         name="password-confirm"
-                        rules={[{
-                            required: true,
-                            message: 'Confirme su contraseña'
-                        }]}
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                            { required: true, message: 'Confirme su contraseña' },
+                            ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject(new Error('Las contraseñas no coinciden'));
+                                },
+                            }),
+                        ]}
                     >
                         <Input.Password prefix={<LockOutlined />} placeholder='Confirmar Password'/>
                     </Form.Item>
@@ -96,6 +90,6 @@ const FormSignIn = () => {
             </Card>
         </>
     );
-}
+};
 
-export default FormSignIn;
+export default FormSignUp;
