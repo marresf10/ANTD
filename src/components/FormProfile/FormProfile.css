@@ -1,0 +1,42 @@
+.centered-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura del viewport completo */
+}
+
+.profile-container {
+    background-color: #dedede; /* Fondo blanco */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra gris */
+    width: 400px; /* Ancho deseado */
+    max-width: 90%; /* Máximo ancho para pantallas más pequeñas */
+}
+
+.profile-info {
+    margin-bottom: 80px;
+}
+
+.profile-info p {
+    margin-bottom: 20px;
+}
+
+.button-container {
+    text-align: center; /* Alinear botones al centro */
+}
+
+.button-container button {
+    background-color: #bebdba; /* Color de fondo */
+    color: #000000; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px; /* Margen derecho entre botones */
+    display: inline-block; /* Mostrar en línea */
+}
+
+.button-container button:hover {
+    background-color: #a2aab3; /* Color de fondo al pasar el ratón */
+}
