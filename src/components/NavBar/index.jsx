@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './NavBar.css';
 import { useAuth } from '../../hooks/useAuth';
 import SideMenu from '../SideMenu';
+import TableAdmisiones from '../../components/TableAdmisiones';
+
 
 const NavBar = () => {
     const { logout } = useAuth();
@@ -26,9 +28,10 @@ const NavBar = () => {
                     </li>
                 </ul>
             </nav>
+
             <main className="home-content">
-                <h1>Bienvenido</h1>
-                <p>Esta es tu página de inicio. Accede al CRUD de productos y gestiona tu perfil.</p>
+                <TableAdmisiones />
+
             </main>
             {showMenu && <SideMenu onClose={toggleMenu} />}
         </div>
