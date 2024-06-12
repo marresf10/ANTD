@@ -1,12 +1,25 @@
 import React from "react";
 import { useAuth } from "../../hooks/useAuth";
 import "./FormProfile.css"; 
+import { useNavigate } from 'react-router-dom';
 
 const FormProfile = () => {
     const { user, logout } = useAuth();
+    const navigate = useNavigate();
+    const handleEditProfile = () => {
+        navigate('/profileUpdate'); 
+    };
+    const inicio = () => {
+        navigate('/'); 
+    };
     return (
         <center>
         <div className="centered-container">
+        <div className="back-icon" onClick={inicio}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                </div>
             <div className="profile-container">
                 <h2>Perfil de Usuario</h2>
                 <div className="profile-info">
@@ -14,7 +27,7 @@ const FormProfile = () => {
                     <p><strong>Email:</strong> {user.email}</p>
                 </div>
                 <div className="button-container">
-                    <button>Editar información</button>
+                    <button onClick={handleEditProfile}>Editar información</button>
                     <button>Cambiar Contraseña</button>
                 </div>
             </div>

@@ -13,7 +13,7 @@ const SideMenu = ({ onClose }) => {
     };
 
     const handleEditProfile = () => {
-        navigate('/profile');  // Navega a la ruta de perfil
+        navigate('/profile'); 
     };
 
     return (
