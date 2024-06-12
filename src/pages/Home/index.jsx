@@ -10,8 +10,6 @@ const Home = () => {
         <div>
         <NavBar />
         </div>
-            <h1>Hola {user.username}</h1>
-            <Button onClick={() => logout()}>Cerrar sesión</Button>
         </>
     );
 };
