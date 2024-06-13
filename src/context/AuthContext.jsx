@@ -2,7 +2,6 @@ import React, { useState, useEffect, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { storageController } from '../services/token'; // Importa el controlador de almacenamiento
 import { usersService } from '../services/users';
-import { admisionesService } from '../services/admisones';
 import { tokenExpired } from '../utils/tokenExpired';
 
 export const AuthContext = createContext();
@@ -37,11 +36,9 @@ export const AuthProvider = (props) => {
             console.log('Obteniendo', token);
             await storageController.setToken(token);
             const response = await usersService.getMe(token);
-            const admisiones = await admisionesService.admisiones();
             setUser(response);
             setLoading(false);
             console.log(response); //muestra el objeto del usuario en consola
-            console.log(admisiones)
         } catch (error) {
             console.error(error);
             setLoading(false);
@@ -57,17 +54,7 @@ export const AuthProvider = (props) => {
             setLoading(false)
         }
     }
-    const admisiones = async (token) => {
-        try {
-            await storageController.setToken(token);
-            const response2 = await admisionesService.admisiones();
-            setLoading(false);
-            console.log('Obteniendo 2', response2)
-        } catch (error) {
-            console.error(error);
-            setLoading(false);
-        }
-    }
+    
     
 
     
@@ -76,7 +63,6 @@ export const AuthProvider = (props) => {
     const data = {
         user,
         login,
-        //admisiones,
         logout,
         upDataUser: () => console.log('update user')
     };

@@ -4,8 +4,7 @@ import { authFetch } from "../utils/authFetch";
 
 const admisiones = async (token) => {
     try {
-        //const decoded = jwtDecode(token)
-        //const userId = decoded.id
+        
         const url =`${ENV.API_URL}/${ENV.ENDPOINTS.ADMISIONES}`
         const response = await authFetch(url);
 

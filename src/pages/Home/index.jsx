@@ -7,7 +7,7 @@ import TableAdmisiones from '../../components/TableAdmisiones';
 
 
 const Home = () => {
-    const { user, logout } = useAuth();
+    const { user,admisiones,  logout } = useAuth();
     return (
         <>
         <div>
