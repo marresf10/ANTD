@@ -54,6 +54,11 @@ export const AuthProvider = (props) => {
             setLoading(false)
         }
     }
+    
+    
+
+    
+    
 
     const data = {
         user,
