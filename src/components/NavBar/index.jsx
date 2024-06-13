@@ -22,7 +22,7 @@ const NavBar = () => {
             <nav className="navbar">
                 <div className="navbar-brand">Mi página</div>
                 <ul className="navbar-menu">
-                    <li className="navbar-item"><a href="/">Admisiones</a></li>
+                    <li className="navbar-item"><a href="/">Productos</a></li>
                     <li className="navbar-item">
                         <a href="#perfil" onClick={toggleMenu}>Perfil</a>
                     </li>
