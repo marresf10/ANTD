@@ -28,7 +28,7 @@ const FormUpdateProfile = () => {
             <div className="profile-container">
                 <form className="profile-form">
                     <div className="form-group">
-                    <h3>Editar datos del usuario</h3>
+                    <h2><center>Editar datos del usuario</center></h2>
                         <label htmlFor="username">Nombre de usuario:</label>
                         <input
                             type="text"
