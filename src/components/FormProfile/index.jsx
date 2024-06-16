@@ -6,11 +6,15 @@ import { useNavigate } from 'react-router-dom';
 const FormProfile = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+
     const handleEditProfile = () => {
         navigate('/profileUpdate'); 
     };
     const inicio = () => {
         navigate('/'); 
+    };
+    const handlePasswordUpdate = () => {
+        navigate('/passwordUpdate'); 
     };
     return (
         <center>
@@ -28,7 +32,7 @@ const FormProfile = () => {
                 </div>
                 <div className="button-container">
                     <button onClick={handleEditProfile}>Editar información</button>
-                    <button>Cambiar Contraseña</button>
+                    <button onClick={handlePasswordUpdate}>Cambiar Contraseña</button>
                 </div>
             </div>
         </div>

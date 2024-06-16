@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
-import "./FormUpdateProfile.css"; 
+import "./FormPassword.css"; 
 
-const FormUpdateProfile = () => {
+const FormUpdatePassword = () => {
     const { user, updateUser } = useAuth();
-    const [username, setUsername] = useState(user?.username || '');
-    const [email, setEmail] = useState(user?.email || '');
-    //const [roles, setRoles] = useState(user?.roles || []); // Estado local para los roles
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleSaveChanges = async () => {
+        if (password !== confirmPassword) {
+            setError('Las contraseñas no coinciden');
+            return;
+        }
+
         const userData = {
             id: user._id,
-            username,
-            email
+            password
         };
 
         try {
             await updateUser(userData);
-            console.log("Datos guardados:", { username, email });
+            console.log("Contraseña guardada:", { password });
             navigate('/profile'); 
         } catch (error) {
-            console.log("Failed to update user", error);
+            console.log("Failed to update password", error);
         }
     };
 
@@ -40,24 +44,25 @@ const FormUpdateProfile = () => {
             <div className="profile-container">
                 <form className="profile-form">
                     <div className="form-group">
-                        <h2><center>Editar datos del usuario</center></h2>
-                        <label htmlFor="username">Nombre de usuario:</label>
+                        <h2><center>Editar contraseña del usuario</center></h2>
+                        <label htmlFor="password">Nueva contraseña:</label>
                         <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="confirmPassword">Confirmar nueva contraseña:</label>
                         <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="password"
+                            id="confirmPassword"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
+                    {error && <p className="error-message">{error}</p>}
 
                     <div className="button-container">
                         <button type="button" onClick={handleSaveChanges}>
@@ -70,5 +75,4 @@ const FormUpdateProfile = () => {
     );
 };
 
-export default FormUpdateProfile;
-
+export default FormUpdatePassword;

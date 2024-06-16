@@ -12,10 +12,6 @@ const SideMenu = ({ onClose }) => {
         logout();
     };
 
-    const handleEditProfile = () => {
-        navigate('/profile');  // Navega a la ruta de perfil
-    };
-
     return (
         <div className="side-menu">
             <button onClick={handleLogout}>Cerrar sesión</button>
