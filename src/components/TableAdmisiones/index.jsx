@@ -13,32 +13,6 @@ const TableAdmisiones = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isModal2Open, setIsModal2Open] = useState(false);
-
-    const handleOk = () => {
-        // Lógica para manejar el botón OK de la primera modal
-        setIsModalOpen(false);
-    };
-
-    const handleCancel = () => {
-        // Lógica para manejar el botón Cancelar de la primera modal
-        setIsModalOpen(false);
-    };
-
-    const handleOk2 = () => {
-        // Lógica para manejar el botón OK de la segunda modal
-        setIsModal2Open(false);
-    };
-
-    const handleCancel2 = () => {
-        // Lógica para manejar el botón Cancelar de la segunda modal
-        setIsModal2Open(false);
-    };
-
-    
-
     useEffect(() => {
         const fetchAdmisiones = async () => {
             try {
@@ -74,13 +48,6 @@ const TableAdmisiones = () => {
             dataIndex: '_id',
             key: '_id',
         },
-        /*
-        {
-            title: 'N°',
-            dataIndex: 'key',
-            key: 'key',
-        },
-        */
         {
             title: 'Nombre',
             dataIndex: 'nombre',
@@ -100,11 +67,9 @@ const TableAdmisiones = () => {
         {
             title: 'Acciones',
             key: 'acciones',
-            render: () => (
+            render: (_, record) => (
               <>
-               
-            
-               <Modals />
+               <Modals admisionId={record._id} />
               </>
             ),
           },
