@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
 import ProfileUpdate from '../pages/ProfileUpdate'
+import PasswordUpdate from '../pages/PasswordUpdate';
 import { useAuth } from '../hooks/useAuth';
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         { path: '/register', element: <Register /> },
         { path: '/profile', element: <Profile /> },
         { path: '/profileUpdate', element: <ProfileUpdate /> },
+        { path: '/passwordUpdate', element: <PasswordUpdate /> },
     ]);
 
     return routes;

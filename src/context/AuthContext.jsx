@@ -55,16 +55,27 @@ export const AuthProvider = (props) => {
         }
     }
     
+    const updateUser = async (userData) => {
+        try {
+            const token = await storageController.getToken();
+            console.log("Token de updateUser: "+token)
+            if (!token) return;
+            const updatedUser = await usersService.updateMe(token, userData);
+            if (updatedUser) {
+                setUser(updatedUser);
+            } else {
+                console.error('Failed to update user');
+            }
+        } catch (error) {
+            console.error('Update user error:', error);
+        }
+    };
     
-
-    
-    
-
     const data = {
         user,
         login,
         logout,
-        upDataUser: () => console.log('update user')
+        updateUser
     };
     if (loading) return null
     return (
