@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Table, Tag, Button, Menu, Dropdown, FloatButton, Modal} from 'antd';
-import { CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
+import { Space, Table, Tag, Button, Menu, Dropdown } from 'antd';
+import { PlusOutlined, CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
 import './TableAdmisiones.css';
 import { useAuth } from '../../hooks/useAuth';
 import { admisionesService } from '../../services/admisones';
 import Modals from '../../components/Modals';
-
 
 const TableAdmisiones = () => {
     const { logout } = useAuth();
@@ -13,24 +12,23 @@ const TableAdmisiones = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchAdmisiones = async () => {
-            try {
-                const token = localStorage.getItem('token'); 
-                const admisionesData = await admisionesService.admisiones(token);
-                // Añadir clave única a cada elemento de los datos
-                const formattedData = admisionesData.map((item, index) => ({
-                    ...item,
-                    key: index + 1, //Asignar un id generico
-                }));
-                setData(formattedData);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
-            }
-        };
+    const fetchAdmisiones = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const admisionesData = await admisionesService.admisiones(token);
+            const formattedData = admisionesData.map((item, index) => ({
+                ...item,
+                key: index + 1,
+            }));
+            setData(formattedData);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchAdmisiones();
     }, []);
 
@@ -61,35 +59,31 @@ const TableAdmisiones = () => {
                 <Tag color={status.toString().toUpperCase() === 'TRUE' ? 'success' : 'error'}>
                     {status.toString().toUpperCase() === 'TRUE' ? 'Activa' : 'Inactiva'}
                 </Tag>
-
             ),
         },
         {
             title: 'Acciones',
             key: 'acciones',
             render: (_, record) => (
-              <>
-               <Modals admisionId={record._id} />
-              </>
+                <>
+                    <Modals type="delete" admisionId={record._id} fetchData={fetchAdmisiones} />
+                </>
             ),
-          },
-        
+        },
     ];
 
-    const menu = (
-        <Menu>
-            <Menu.Item key="0">
-                <a onClick={handleLogout}>Logout</a>
-            </Menu.Item>
-            <Menu.Item key="1">
-                <a>Profile</a>
-            </Menu.Item>
-        </Menu>
-    );
-
     return (
-        <div className="table-header">Admisiones
-            <Table columns={columns} dataSource={data} loading={loading} />
+        <div className="table-header">
+            <div className="table-header-title">
+                <h2>Admisiones</h2>
+                <Modals type="add" fetchData={fetchAdmisiones} />
+            </div>
+            <Table
+                columns={columns}
+                dataSource={data}
+                loading={loading}
+                pagination={{ pageSize: 5 }}
+            />
         </div>
     );
 };
