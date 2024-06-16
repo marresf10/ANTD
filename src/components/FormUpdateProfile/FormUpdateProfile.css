@@ -1,0 +1,64 @@
+.centered-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Altura del viewport completo */
+}
+
+.profile-container {
+    position: relative; /* Necesario para posicionar el ícono dentro del contenedor */
+    background-color: #dedede; /* Fondo blanco */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra gris */
+    width: 400px; /* Ancho deseado */
+    max-width: 90%; /* Máximo ancho para pantallas más pequeñas */
+}
+
+.back-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: calc(100% - 20px); /* Ajustar el ancho del input */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-container {
+    text-align: center; /* Alinear botones al centro */
+}
+
+.button-container button {
+    background-color: #bebdba; /* Color de fondo */
+    color: #000000; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px; /* Margen derecho entre botones */
+    display: inline-block; /* Mostrar en línea */
+}
+
+.button-container button:hover {
+    background-color: #a2aab3; /* Color de fondo al pasar el ratón */
+}
