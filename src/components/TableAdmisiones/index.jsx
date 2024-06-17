@@ -67,6 +67,7 @@ const TableAdmisiones = () => {
             render: (_, record) => (
                 <>
                     <Modals type="delete" admisionId={record._id} fetchData={fetchAdmisiones} />
+                    <Modals type="edit" admisionId={record._id} fetchData={fetchAdmisiones} />
                 </>
             ),
         },
