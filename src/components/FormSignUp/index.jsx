@@ -85,7 +85,7 @@ const FormSignUp = () => {
                             Registrarse
                         </Button>
                     </Form.Item>
-                    ¿Ya tienes cuenta? <a href="">Inicia sesión</a>
+                    ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
                 </Form>
             </Card>
         </>
