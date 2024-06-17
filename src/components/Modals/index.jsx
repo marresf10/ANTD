@@ -74,7 +74,7 @@ const Modals = ({ admisionId, type, fetchData }) => {
                 okText={type === 'add' ? 'Agregar' : type === 'delete' ? 'Eliminar' : 'Guardar'}
             >
                 {type === 'delete' ? (
-                    <p>¿Estás seguro que deseas eliminar la admisión {admisionId}?</p>
+                    <p>¿Estás seguro que deseas eliminar la admisión?</p>
                 ) : (
                     <Form form={form}>
                         <Form.Item
