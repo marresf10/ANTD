@@ -1,3 +1,5 @@
+/* TableAdmisiones.css */
+
 .table-container {
     padding: 20px;
 }
@@ -10,4 +12,82 @@
     margin-bottom: 10px;
     font-size: 1.5em;
     padding: 50px;
+}
+
+.table-header {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo casi blanco con transparencia */
+    border: 0px solid #e8e8e8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra gris sutil */
+}
+
+
+/* Estilos para el título y botón de añadir */
+.table-header-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-header-title h3 {
+    font-size: 24px;
+    color: #5c646d;
+    margin-bottom: 0;
+}
+
+/* Estilos para los botones */
+.ant-btn-primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+}
+
+.ant-btn-link {
+    color: #1890ff;
+}
+
+.ant-btn-link2 {
+    color: #e54c34;
+}
+
+.ant-btn-link:hover,
+.ant-btn-link:focus {
+    color: #40a9ff;
+}
+
+.edit-button .anticon {
+    color: #1890ff; /* Color azul para editar */
+}
+
+.delete-button .anticon {
+    color: #e54c34; /* Color rojo para eliminar */
+}
+
+/* Estilos para la tabla */
+.ant-table {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+}
+
+.ant-table-thead > tr > th {
+    background-color: #f0f2f5;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ant-table-tbody > tr > td {
+    text-align: center;
+}
+
+/* Estilos para las etiquetas (Tags) */
+.ant-tag {
+    font-size: 12px;
+    padding: 4px 8px;
 }
