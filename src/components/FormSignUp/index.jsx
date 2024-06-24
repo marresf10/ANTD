@@ -41,7 +41,7 @@ const FormSignUp = () => {
                 setLoading(false);
                 return;
             }
-    
+
             // Aquí asegúrate de que los nombres de los campos coincidan con lo que espera tu backend
             await authService.register(values.username, values.imgurl, values.email, values.password);
             console.log('Registro exitoso');
@@ -84,6 +84,8 @@ const FormSignUp = () => {
                     <Form.Item
                         name="imgurl"
                         rules={[{ required: true, message: "Por favor ingrese un link de imagen" }]}
+                        validateStatus={imgUrlError ? 'error' : ''}
+                        help={imgUrlError}
                     >
                         <Input
                             prefix={<FileImageOutlined />}

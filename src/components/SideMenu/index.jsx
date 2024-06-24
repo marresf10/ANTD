@@ -19,10 +19,13 @@ const SideMenu = ({ onClose }) => {
         <div className="side-menu-container">
             <div className="side-menu">
                 <button className="close-button" onClick={onClose}>✖</button>
-                <center><h1>Hola {user.username}</h1></center>
+                <center>
+                    <h1>Hola {user.username}</h1>
+                    <img className='side-img' width={200} height={200} src={user.imgurl} />
+                </center>
                 <div className="bottom-buttons">
                     <button onClick={perfil}>Cuenta</button>
-                    <button  className="button2" onClick={handleLogout}>Cerrar sesión</button>
+                    <button className="button2" onClick={handleLogout}>Cerrar sesión</button>
                 </div>
             </div>
         </div>
