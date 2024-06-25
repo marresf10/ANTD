@@ -4,10 +4,13 @@ import { authFetch } from "../utils/authFetch";
 const admisiones = async (token) => {
     try {
         const url = `${ENV.API_URL}/${ENV.ENDPOINTS.ADMISIONES}`;
-        const response = await authFetch(url);
+        const response = token ? await authFetch(url) : await fetch(url); // Usar authFetch solo si hay token
+        if (!response.ok) {
+            throw new Error('Error al obtener las admisiones');
+        }
         return await response.json();
     } catch (error) {
-        console.log(error);
+        console.error('Error en función admisiones:', error);
         throw new Error('Error al obtener las admisiones');
     }
 };
@@ -27,11 +30,10 @@ const getAdmision = async (token, admisionId) => {
         console.log(data); // Imprimir el objeto JSON
         return data;
     } catch (error) {
-        console.log(error);
+        console.error('Error en función getAdmision:', error);
         throw new Error('Error al obtener la admisión');
     }
 };
-
 
 const addAdmision = async (token, admissionData) => {
     try {
@@ -46,7 +48,7 @@ const addAdmision = async (token, admissionData) => {
         });
         return await response.json();
     } catch (error) {
-        console.log(error);
+        console.error('Error en función addAdmision:', error);
         throw new Error('Error al agregar la admisión');
     }
 };
@@ -64,7 +66,7 @@ const updateAdmision = async (token, admisionId, updatedData) => {
         });
         return await response.json();
     } catch (error) {
-        console.log(error);
+        console.error('Error en función updateAdmision:', error);
         throw new Error('Error al actualizar la admisión');
     }
 };
@@ -87,7 +89,7 @@ const deleteAdmissions = async (token, admisionId) => {
 
         return await response.json();
     } catch (error) {
-        console.log(error);
+        console.error('Error en función deleteAdmissions:', error);
         throw new Error('Error al eliminar la admisión');
     }
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import Home from '../pages/Home';
+import HomePublic from '../pages/HomePublic';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
@@ -13,6 +14,7 @@ const AppRoutes = () => {
 
     let routes = useRoutes([
         { path: '/', element: user ? <Home /> : <Login /> },
+        { path: '/Admisiones', element: <HomePublic /> },
         { path: '/login', element: <Login /> },
         { path: '/register', element: <Register /> },
         { path: '/profile', element: <Profile /> },

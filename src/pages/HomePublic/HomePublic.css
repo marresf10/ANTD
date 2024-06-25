@@ -1,0 +1,19 @@
+/* HomePublic.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+    text-align: center;
+}
+
+.navbar, .table-admisiones {
+    margin-bottom: 20px;
+}
+
+.logout-button {
+    margin-top: 20px;
+}
