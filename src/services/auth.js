@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { ENV } from '../utils/constants';
 
-const register = async (username, email, password) => {
+const register = async (username, imgurl, email, password) => {
     return axios.post(`${ENV.API_URL}/${ENV.ENDPOINTS.REGISTER}`, {
         username,
         email,
         password,
+        imgurl,
         roles: ['moderador'],
     });
 };

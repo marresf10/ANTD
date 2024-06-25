@@ -29,6 +29,7 @@ const FormProfile = () => {
                 <div className="profile-info">
                     <p><strong>Nombre de usuario:</strong> {user.username}</p>
                     <p><strong>Email:</strong> {user.email}</p>
+                    <center><img width={200} height={200} src={user.imgurl}/></center>
                 </div>
                 <div className="button-container">
                     <button onClick={handleEditProfile}>Editar información</button>

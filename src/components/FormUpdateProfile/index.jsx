@@ -7,6 +7,7 @@ const FormUpdateProfile = () => {
     const { user, updateUser } = useAuth();
     const [username, setUsername] = useState(user?.username || '');
     const [email, setEmail] = useState(user?.email || '');
+    const [imgurl, setImgUrl] = useState(user?.imgurl || '');
     //const [roles, setRoles] = useState(user?.roles || []); // Estado local para los roles
     const navigate = useNavigate();
 
@@ -14,12 +15,13 @@ const FormUpdateProfile = () => {
         const userData = {
             id: user._id,
             username,
-            email
+            email,
+            imgurl
         };
 
         try {
             await updateUser(userData);
-            console.log("Datos guardados:", { username, email });
+            console.log("Datos guardados:", { username, email, imgurl });
             navigate('/profile'); 
         } catch (error) {
             console.log("Failed to update user", error);
@@ -56,6 +58,15 @@ const FormUpdateProfile = () => {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="imagen">Url imagen:</label>
+                        <input
+                            type="text"
+                            id="imgurl"
+                            value={imgurl}
+                            onChange={(e) => setImgUrl(e.target.value)}
                         />
                     </div>
 

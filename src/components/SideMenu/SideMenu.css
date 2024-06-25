@@ -47,3 +47,7 @@
 .side-menu button:hover {
     color: #000000;
 }
+
+.side-img {
+    border-radius: 100%;
+}
