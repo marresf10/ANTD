@@ -11,6 +11,10 @@ const FormSignUp = () => {
     const [imgUrlError, setImgUrlError] = useState('');
     const navigate = useNavigate();
 
+    const handleLogin = () => {
+        navigate('/login'); 
+    };
+
     const validateImageURL = async (value) => {
         if (!value) {
             setImgUrlError('Por favor ingrese un link de imagen');
@@ -128,7 +132,7 @@ const FormSignUp = () => {
                             Registrarse
                         </Button>
                     </Form.Item>
-                    ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+                    ¿Ya tienes una cuenta? <a href="#" onClick={handleLogin}>Inicia sesión</a>
                 </Form>
             </Card>
         </>

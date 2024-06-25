@@ -16,6 +16,10 @@ const FormLogin = () => {
         navigate('/Admisiones'); 
     };
 
+    const handleRegistro = () => {
+        navigate('/register'); 
+    };
+
     const onFinish = async (values) => {
         setLoading(true);
         setLoginError(false);
@@ -86,7 +90,7 @@ const FormLogin = () => {
                         Ver admisiones
                     </Button>
                 </Form.Item>
-                ¿Aún no tienes cuenta? <a href="/register">Regístrate</a>
+                ¿Aún no tienes cuenta? <a href="#" onClick={handleRegistro}>Regístrate</a>
             </Form>
         </Card>
     );
