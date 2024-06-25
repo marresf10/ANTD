@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Input, Switch } from 'antd';
+import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'; // Importar los iconos necesarios
 import { admisionesService } from '../../services/admisones';
+import './Modals.css'; // Importar tu archivo CSS para los estilos específicos de Modals
 
 const Modals = ({ admisionId, type, fetchData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,10 +63,24 @@ const Modals = ({ admisionId, type, fetchData }) => {
         setIsModalOpen(false);
     };
 
+    // Determinar qué icono y texto usar según el tipo de modal
+    let icon;
+    let buttonText;
+    if (type === 'add') {
+        icon = <PlusOutlined />;
+        buttonText = 'Agregar';
+    } else if (type === 'edit') {
+        icon = <EditOutlined />;
+        buttonText = '';
+    } else if (type === 'delete') {
+        icon = <DeleteOutlined />;
+        buttonText = '';
+    }
+
     return (
         <>
-            <Button onClick={openModal}>
-                {type === 'add' ? 'Agregar' : type === 'delete' ? 'Eliminar' : 'Editar'}
+            <Button className={type === 'edit' ? 'edit-button' : type === 'delete' ? 'delete-button' : type === 'add' ? 'add-button' : ''} icon={icon} onClick={openModal}>
+                {buttonText}
             </Button>
             <Modal
                 title={type === 'add' ? 'Agregar Admisión' : type === 'delete' ? 'Eliminar Admisión' : 'Editar Admisión'}

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Table, Tag, Button, Menu, Dropdown } from 'antd';
-import { PlusOutlined, CommentOutlined, CustomerServiceOutlined } from '@ant-design/icons';
-import './TableAdmisiones.css';
+import { Space, Table, Tag } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
 import { admisionesService } from '../../services/admisones';
 import Modals from '../../components/Modals';
+import './TableAdmisiones.css'; // Asegúrate de tener tu archivo CSS importado correctamente
 
 const TableAdmisiones = () => {
     const { logout } = useAuth();
-    const [showMenu, setShowMenu] = useState(false);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -36,25 +34,24 @@ const TableAdmisiones = () => {
         logout();
     };
 
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    };
-
     const columns = [
         {
             title: 'Id',
             dataIndex: '_id',
             key: '_id',
+            align: 'left', // Centrar el texto en esta columna
         },
         {
             title: 'Nombre',
             dataIndex: 'nombre',
             key: 'nombre',
+            align: 'left', // Centrar el texto en esta columna
         },
         {
             title: 'Activo',
             dataIndex: 'activo',
             key: 'activo',
+            align: 'center', // Centrar el texto en esta columna
             render: status => (
                 <Tag color={status.toString().toUpperCase() === 'TRUE' ? 'success' : 'error'}>
                     {status.toString().toUpperCase() === 'TRUE' ? 'Activa' : 'Inactiva'}
@@ -64,11 +61,12 @@ const TableAdmisiones = () => {
         {
             title: 'Acciones',
             key: 'acciones',
+            align: 'center', // Centrar el contenido en esta columna
             render: (_, record) => (
-                <>
-                    <Modals type="delete" admisionId={record._id} fetchData={fetchAdmisiones} />
+                <Space>
                     <Modals type="edit" admisionId={record._id} fetchData={fetchAdmisiones} />
-                </>
+                    <Modals type="delete" admisionId={record._id} fetchData={fetchAdmisiones} />
+                </Space>
             ),
         },
     ];
@@ -76,7 +74,7 @@ const TableAdmisiones = () => {
     return (
         <div className="table-header">
             <div className="table-header-title">
-                <h2>Admisiones</h2>
+                <h3>Admisiones</h3>
                 <Modals type="add" fetchData={fetchAdmisiones} />
             </div>
             <Table

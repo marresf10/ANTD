@@ -20,7 +20,7 @@ const NavBar = () => {
     return (
         <div className="home-container">
             <nav className="navbar">
-                <div className="navbar-brand">Mi página</div>
+                <div className="navbar-brand">LIZARD 2.0</div>
                 <ul className="navbar-menu">
                     <li className="navbar-item"><a href="/">Admisiones</a></li>
                     <li className="navbar-item">
