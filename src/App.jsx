@@ -1,8 +1,12 @@
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, notification } from 'antd';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import AppRoutes from './routes';
 import './App.css';
+
+notification.config({
+  placement: 'bottomRight',
+});
 
 function App() {
   return (
