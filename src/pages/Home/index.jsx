@@ -12,7 +12,6 @@ const Home = () => {
         <>
         <div>
         <NavBar />
-        <TableAdmisiones />
         </div>
         </>
     );
