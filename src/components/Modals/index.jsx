@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form, Input, Switch } from 'antd';
-import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'; // Importar los iconos necesarios
+import { Modal, Button, Form, Input, Switch, notification } from 'antd';
+import { PlusOutlined, DeleteOutlined, EditOutlined, CheckOutlined } from '@ant-design/icons';
 import { admisionesService } from '../../services/admisones';
-import './Modals.css'; // Importar tu archivo CSS para los estilos específicos de Modals
+import './Modals.css';
 
 const Modals = ({ admisionId, type, fetchData }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [form] = Form.useForm(); // Utiliza el hook useForm para obtener la instancia del formulario
+    const [form] = Form.useForm();
 
     useEffect(() => {
         const fetchAdmissionData = async () => {
             try {
                 const token = localStorage.getItem('token');
                 const admissionData = await admisionesService.getAdmision(token, admisionId);
-                // Establecer los valores en los campos del formulario solo en la modal de editar
                 if (type === 'edit') {
                     form.setFieldsValue({
                         nombre: admissionData.nombre,
@@ -34,26 +33,35 @@ const Modals = ({ admisionId, type, fetchData }) => {
         setIsModalOpen(true);
     };
 
+    const openNotificationWithIcon = (type, message, icon) => {
+        notification.open({
+            message: message,
+            icon: icon,
+            placement: 'bottomRight'
+        });
+    };
+
     const handleOk = async () => {
         try {
             const token = localStorage.getItem('token');
             if (type === 'delete') {
                 await admisionesService.deleteAdmissions(token, admisionId);
+                openNotificationWithIcon('success', 'Eliminado exitosamente', <DeleteOutlined style={{ color: 'red' }} />);
             } else {
                 const values = await form.validateFields();
                 if (type === 'add') {
-                    // Añadir la admisión con el valor de activo
                     const admissionData = { nombre: values.nombre, activo: values.activo };
                     await admisionesService.addAdmision(token, admissionData);
+                    openNotificationWithIcon('success', 'Agregado exitosamente', <PlusOutlined style={{ color: 'green' }} />);
                 } else if (type === 'edit') {
-                    // Actualizar la admisión con los nuevos valores
                     const updatedData = { nombre: values.nombre, activo: values.activo };
                     await admisionesService.updateAdmision(token, admisionId, updatedData);
+                    openNotificationWithIcon('success', 'Editado exitosamente', <EditOutlined style={{ color: 'blue' }} />);
                 }
-                form.resetFields(); // Restablecer el formulario después de agregar/editar
+                form.resetFields();
             }
             setIsModalOpen(false);
-            fetchData(); // Actualizar los datos de la tabla
+            fetchData();
         } catch (error) {
             console.log(error);
         }
@@ -63,7 +71,6 @@ const Modals = ({ admisionId, type, fetchData }) => {
         setIsModalOpen(false);
     };
 
-    // Determinar qué icono y texto usar según el tipo de modal
     let icon;
     let buttonText;
     if (type === 'add') {
@@ -105,7 +112,7 @@ const Modals = ({ admisionId, type, fetchData }) => {
                                 label="Activo"
                                 name="activo"
                                 valuePropName="checked"
-                                initialValue={true} // Establece el valor inicial del Switch a true (activo por defecto)
+                                initialValue={true}
                             >
                                 <Switch />
                             </Form.Item>
