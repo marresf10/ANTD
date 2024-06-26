@@ -1,6 +1,4 @@
-/* SideMenu.css */
-
-.side-menu {
+.side-menu-container {
     position: fixed;
     top: 0;
     right: 0;
@@ -8,46 +6,59 @@
     width: 250px;
     background-color: rgba(145, 145, 145, 0.386); /* Fondo más transparente */
     backdrop-filter: blur(10px); /* Efecto borroso */
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 1);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); /* Ajuste de sombra */
     padding: 20px;
+}
+
+.side-menu {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
-    align-items: flex-end;
+    justify-content: center; /* Centra verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    height: 80%; /* Ajusta la altura al contenido */
+    position: relative; /* Permite el posicionamiento absoluto de elementos hijos */
+}
+
+.close-button {
+    width: 10%; /* Ancho del botón */
+    display: flex; /* Utiliza flexbox para la alineación */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    text-align: center; /* Asegura que el texto esté centrado */
+    background-color: #FFFFFF;
+    /*margin-left: auto; Empuja el botón hacia la derecha */
+    margin-bottom: 10px; /* Espacio inferior */
 }
 
 .side-menu .bottom-buttons {
-    align-self: flex-start; /* Alinea el contenedor de los botones a la izquierda */
+    margin-top: 20px; /* Espacio superior entre el contenido principal y los botones */
 }
 
 .side-menu button {
+    width: 100%; /* Ancho completo */
     background-color: #333;
     border: none;
     cursor: pointer;
     font-size: 1rem;
     color: #ffffff;
-    margin-bottom: 30px;
-    margin-right: 5px;
-    margin-left: 8px;
-    transition: color 0.3s;
+    margin-bottom: 10px; /* Espacio entre botones */
+    padding: 10px; /* Espaciado interno */
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.side-menu .button2 { /* Corrección: utiliza .button2 en lugar de button2 */
+.side-menu .button2 {
     background-color: #f16363;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    color: #ffffff; /* Cambiado a blanco para que sea visible */
-    margin-bottom: 30px;
-    margin-right: 5px;
-    margin-left: 8px;
-    transition: color 0.3s;
 }
 
 .side-menu button:hover {
-    color: #000000;
+    background-color: #000000;
 }
 
 .side-img {
-    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* Hace la imagen redonda */
+    object-fit: cover; /* Ajusta la imagen dentro del contenedor */
+    border: 4px solid #fff; /* Añade un borde blanco */
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }

@@ -65,9 +65,11 @@ const FormUpdatePassword = () => {
                     {error && <p className="error-message">{error}</p>}
 
                     <div className="button-container">
+                        <center>
                         <button type="button" onClick={handleSaveChanges}>
                             Guardar cambios
                         </button>
+                        </center>
                     </div>
                 </form>
             </div>

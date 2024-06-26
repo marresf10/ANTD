@@ -71,9 +71,11 @@ const FormUpdateProfile = () => {
                     </div>
 
                     <div className="button-container">
+                        <center>
                         <button type="button" onClick={handleSaveChanges}>
                             Guardar cambios
                         </button>
+                        </center>
                     </div>
                 </form>
             </div>
